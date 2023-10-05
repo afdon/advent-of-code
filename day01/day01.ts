@@ -53,6 +53,14 @@ function part1(input: string) {
 
     console.log(sumsAscending[0])
 
-    return sumsAscending[0]
+    // find the sum of the top 3
+
+    let sumOfTop3 = 0
+
+    for (let i = 0; i < 3; i++) {
+        sumOfTop3 = sumOfTop3 + sumsAscending[i]
+    }
+
+    console.log(sumOfTop3)
 }
 
