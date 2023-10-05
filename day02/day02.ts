@@ -25,13 +25,13 @@ function part1(input: string) {
 
   let scores = moves.map((move) => {
     switch (move) {
-      case "AX": return 1 + 3  
-      case "BX": return 1 + 6
-      case "CX": return 1 + 0
-      case "AY": return 2 + 8
-      case "BY": return 2 + 3 
-      case "CY": return 2 + 0 
-      case "AZ": return 3 + 0 
+      case "AX": return 1 + 3  // you play rock, opponent plays rock
+      case "BX": return 1 + 0  // you play rock, opponent plays paper
+      case "CX": return 1 + 6  // you play rock, opponent plays scissors
+      case "AY": return 2 + 6  // you play paper, opponent plays rock
+      case "BY": return 2 + 3  // you play paper, opponent plays paper
+      case "CY": return 2 + 0  // you play paper, opponent plays scissors
+      case "AZ": return 3 + 0  // you play scissors, 
       case "BZ": return 3 + 6
       case "CZ": return 3 + 3
       default: console.log("error")
