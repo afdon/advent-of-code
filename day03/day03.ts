@@ -60,7 +60,7 @@ function part1(input: string) {
 
 // ... forget it, too long.
 
-const sortedByPriority = "0abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+const sortedByPriority = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 // for each char in sharedItemTypes, 
 // find the indexOf that char in sortedByPriority.
@@ -74,9 +74,11 @@ let sumOfItemPriorities = itemPriorities.reduce((a, b) => a + b, 0)
 console.log("sumOfItemPriorities", sumOfItemPriorities)
 console.log("itemPriorities", itemPriorities)
 console.log(`The priority of ${sharedItemTypes[0]} is ${sortedByPriority.indexOf(sharedItemTypes[0])}`)
+console.log("the length of this emoji is: ", "👾".length) // 2. WOW!!!!!
 
 return sumOfItemPriorities
 
 // then sum them up.
 
 }
+
