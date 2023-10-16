@@ -60,7 +60,7 @@ function part1(input: string) {
 
 // ... forget it, too long.
 
-const sortedByPriority = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+const sortedByPriority = "0abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 // for each char in sharedItemTypes, 
 // find the indexOf that char in sortedByPriority.

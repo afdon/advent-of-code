@@ -34,7 +34,9 @@ function part2(input: string) {
       
   for (let i = 0; i < lines.length - 1; i++) {
 
-    // if (!groups[j]) { groups[j] = [] } // appease typescript
+    if (!groups[j]) { groups[j] = [] } // appease typescript
+
+    console.log("groups[j]", groups[j])
 
     // push lines[i] into groups[j] while groups[j].length < 3
 
@@ -47,7 +49,9 @@ function part2(input: string) {
 
         j++
 
-        console.log("after incrementing j, groups[j].length: ", groups[j].length)
+        console.log("j: ", j)
+
+        // console.log("after incrementing j, groups[j].length: ", groups[j].length)
 
     }
   }
