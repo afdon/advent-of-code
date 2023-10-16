@@ -8,10 +8,10 @@ fs.readFile("input.txt", "utf8", (err, data) => {
     return;
   }
 
-  part1(data);
+  part2(data);
 });
 
-function part1(input: string) {
+function part2(input: string) {
   const lines = input.split("\n");
 
   const moves = lines.map((line) => {
