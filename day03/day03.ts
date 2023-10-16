@@ -1,3 +1,6 @@
+
+//  Find the item type that appears in both compartments of each rucksack. What is the sum of the priorities of those item types?
+
 import fs from "fs";
 
 // Read the input file asynchronously
@@ -44,6 +47,34 @@ function part1(input: string) {
 
   console.log("sharedItemTypes", sharedItemTypes)
 
-//  Find the item type that appears in both compartments of each rucksack. What is the sum of the priorities of those item types?
+  // sharedItemTypes is a string of all the shared item types.
+
+//   sharedItemTypes.split("").map(type => {
+//     switch(type) {
+//         case "a": return 1;
+//         case "b": return 2;
+//         case "c": return 3;
+//         case "d": return 4;
+//    }
+//   })
+
+const sortedByPriority = "0abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+// for each char in sharedItemTypes, 
+// find the indexOf that char in sortedByPriority.
+
+let itemPriorities: number[] = sharedItemTypes.split("").map(type => {
+    return sortedByPriority.indexOf(type)
+})
+
+let sumOfItemPriorities = itemPriorities.reduce((a, b) => a + b, 0)
+
+console.log("sumOfItemPriorities", sumOfItemPriorities)
+console.log("itemPriorities", itemPriorities)
+console.log(`The priority of ${sharedItemTypes[0]} is ${sortedByPriority.indexOf(sharedItemTypes[0])}`)
+
+return sumOfItemPriorities
+
+// then sum them up.
 
 }
