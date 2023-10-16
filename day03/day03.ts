@@ -58,6 +58,8 @@ function part1(input: string) {
 //    }
 //   })
 
+// ... forget it, too long.
+
 const sortedByPriority = "0abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 // for each char in sharedItemTypes, 
