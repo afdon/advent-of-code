@@ -30,7 +30,7 @@ function part1(input: string) {
   console.log(`There are ${instructions.length} tasks`);
 
   // loop through the instructions; parse and perform each task
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < instructions.length; i++) {
     let task = parseTask(instructions[i]);
     performTask(task);
   }
