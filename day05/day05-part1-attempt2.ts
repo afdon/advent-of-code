@@ -12,43 +12,33 @@ fs.readFile("input.txt", "utf8", (err, data) => {
 });
 
 function part1(input: string) {
-//   const lines = input.split("\n");
 
     const initialState = input.split("\n").slice(0, 10);
-    // console.log("initial state: ", initialState)
 
     const instructions = input.split("\n").slice(10)
-    // console.log("instructions: ", instructions)
 
     const stackLine = initialState[initialState.length - 2]
     console.log("stackLine:", stackLine)
     const charPositions = getCharPositions(stackLine)
     console.log(`charPositions:`, charPositions)
 
-    // console.log("initialState's type is:", typeof initialState)
     const numOfStacks = getNumberOfStacks(initialState)
-    // console.log ("number of stacks:", numOfStacks)
 
-    const representation = createRepresentation(initialState)
-    console.log("representation", representation)
+    // const representation = createRepresentation(initialState)
+    // console.log("representation", representation)
 
-    // let task = {
-    //     "number of stacks": numOfStacks,
-    //     "initialState": initialState,
-    //     "instructions": instructions
-    // }
+    console.log("cleaned line 0:", cleanLine(initialState[0]))
 
-    // console.log("task:", task)
 }
 
 function createRepresentation(initial) {
     // const numOfStacks = getNumberOfStacks(initial)
 
-    const linesToProcess = initial.slice(0, -2) // exclude the stack line and the empty line
+    // const linesToProcess = initial.slice(0, -2) // exclude the stack line and the empty line
 
     // go through each line, starting from the end.
 
-    let boxesArray = new Array(getNumberOfStacks(initial))
+    // let boxesArray = new Array(getNumberOfStacks(initial))
 
 //     for (let i = linesToProcess.length - 1; i <= 0; i--) {
 
@@ -57,9 +47,22 @@ function createRepresentation(initial) {
 
 //// wip
 
-function getCharPositions(line: string) {
+//// helper functions
 
+function cleanLine(line: string) {
+    let cleanedLine = line.split("").map((char, i) => {
+        if (charPositions.includes(i)) {
+            return char
+        }
+    }).filter(char => char !== undefined)
+    console.log("cleanedLine:", cleanedLine)
+    return cleanedLine
+}
+
+let charPositions: number[]
+function getCharPositions(line: string) {
     let charIndices: number[] = []
+
     line.split("").map(char => {
         if (isNaN(parseInt(char))) {
             console.log(`This char: ${char} is not a number.`, char)
@@ -71,10 +74,9 @@ function getCharPositions(line: string) {
         }
     })
     console.log(charIndices)
+    charPositions = charIndices
     return charIndices
 }
-
-//// helper functions
 
 function isLetter(str) {
     if (str.match(/[a-z]/i)) return str
