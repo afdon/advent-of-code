@@ -15,32 +15,34 @@ function part1(input: string) {
   const instructions = input.split("\n").slice(10);
 
   const stackLine = initialState[initialState.length - 2];
-  console.log("stackLine:", stackLine);
+//   console.log("stackLine:", stackLine);
   const charPositions = getCharPositions(stackLine);
-  console.log(`charPositions:`, charPositions);
+//   console.log(`charPositions:`, charPositions);
 
   const numOfStacks = getNumberOfStacks(initialState);
 
   let cleaned = cleanLine(initialState[0]);
-  console.log("cleaned:", cleaned);
+//   console.log("cleaned:", cleaned);
 
   const representation = createRepresentation(initialState);
-  console.log("representation", representation)
+//   console.log("representation", representation)
 
   printRepresentation(representation)
 }
 
 
-
 //// wip
+
+
+
+//// helper functions
 
 function printRepresentation(rep: any) {
     rep.map((e, i) => {
-        console.log(`this is index ${i}:`, e)
+        console.log(`this is index ${i}, stack #${i + 1}:`, e)
     })
 }
 
-//// helper functions
 
 function createRepresentation(initial) {
   const linesToProcess = initial.slice(0, -2); // exclude the stack line and the empty line
@@ -77,7 +79,7 @@ function cleanLine(line: string) {
       }
     })
     .filter((char) => char !== undefined);
-  console.log("cleanedLine:", cleanedLine);
+//   console.log("cleanedLine:", cleanedLine);
   return cleanedLine;
 }
 
@@ -87,15 +89,15 @@ function getCharPositions(line: string) {
 
   line.split("").map((char) => {
     if (isNaN(parseInt(char))) {
-      console.log(`This char: ${char} is not a number.`);
+    //   console.log(`This char: ${char} is not a number.`);
     } else {
-      console.log("char:", char);
+    //   console.log("char:", char);
       let index: number = line.indexOf(char);
-      console.log("position:", index);
+    //   console.log("position:", index);
       charIndices.push(index);
     }
   });
-  console.log(charIndices);
+//   console.log(charIndices);
   charPositions = charIndices;
   return charIndices;
 }
@@ -106,6 +108,6 @@ function isLetter(str) {
 
 function getNumberOfStacks(initial) {
   const stacksArray = initial[initial.length - 2].trim().split("   "); // trim; split by 3 spaces
-  console.log("stacks array", stacksArray);
+//   console.log("stacks array", stacksArray);
   return stacksArray.length;
 }
