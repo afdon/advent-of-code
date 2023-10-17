@@ -20,11 +20,37 @@ function part1(input: string) {
   printRepresentation(representation)
 
   const instructions = input.split("\n").slice(10);
-  console.log(`There are ${instructions.length} lines of instructions`)
+  console.log(`There are ${instructions.length} tasks`)
 
-  console.log(`First task: ${instructions[0]}`)
+  // console.log(`First task: ${instructions[0]}`)
+
+  let task = parseTask(instructions[0]);
+  performTask(task);
 }
 
+function performTask(task: {
+  move: number;
+  from: number;
+  to: number;
+}) {
+
+}
+
+function parseTask(str: string): {
+  move: number; 
+  from: number; 
+  to: number;
+} {
+  let split = str.split(" ")
+  console.log("split:", split)
+  let task = {
+    move: parseInt(split[1]),
+    from: parseInt(split[3]),
+    to: parseInt(split[5]),
+  }
+  console.log("task:", task)
+  return task
+}
 
 //// wip
 
