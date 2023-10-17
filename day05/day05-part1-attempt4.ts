@@ -15,11 +15,9 @@ function part1(input: string) {
   const instructions = input.split("\n").slice(10);
 
   const stackLine = initialState[initialState.length - 2];
-//   console.log("stackLine:", stackLine);
   const charPositions = getCharPositions(stackLine);
-//   console.log(`charPositions:`, charPositions);
 
-  const numOfStacks = getNumberOfStacks(initialState);
+  // const numOfStacks = getNumberOfStacks(initialState);
 
   const representation: string[][] = createRepresentation(initialState);
   printRepresentation(representation)
@@ -70,6 +68,7 @@ function cleanLine(line: string) {
 }
 
 let charPositions: number[];
+
 function getCharPositions(line: string) {
   let charIndices: number[] = [];
 
@@ -81,7 +80,7 @@ function getCharPositions(line: string) {
     }
   });
   charPositions = charIndices;
-  return charIndices;
+  return charPositions;
 }
 
 function isLetter(str) {
