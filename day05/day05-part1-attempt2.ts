@@ -27,8 +27,6 @@ function part1(input: string) {
     // const representation = createRepresentation(initialState)
     // console.log("representation", representation)
 
-    console.log("cleaned line 0:", cleanLine(initialState[0]))
-
 }
 
 function createRepresentation(initial) {
