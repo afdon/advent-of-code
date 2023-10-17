@@ -12,8 +12,6 @@ fs.readFile("input.txt", "utf8", (err, data) => {
 function part1(input: string) {
   const initialState = input.split("\n").slice(0, 10);
 
-  const instructions = input.split("\n").slice(10);
-
   const stackLine = initialState[initialState.length - 2];
   // const charPositions = 
   getCharPositions(stackLine);
@@ -21,6 +19,10 @@ function part1(input: string) {
   const representation: string[][] = createRepresentation(initialState);
   printRepresentation(representation)
 
+  const instructions = input.split("\n").slice(10);
+  console.log(`There are ${instructions.length} lines of instructions`)
+
+  console.log(`First task: ${instructions[0]}`)
 }
 
 
