@@ -16,7 +16,7 @@ let counter = 0
 function part1(input: string) {
   const lines = input.split("\n");
 
-  lines.map(line => {
+  lines.forEach(line => {
     let pair = line.split(",")
 
     console.log("pair", pair)
