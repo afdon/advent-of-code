@@ -15,7 +15,8 @@ function part1(input: string) {
   const instructions = input.split("\n").slice(10);
 
   const stackLine = initialState[initialState.length - 2];
-  const charPositions = getCharPositions(stackLine);
+  // const charPositions = 
+  getCharPositions(stackLine);
 
   const representation: string[][] = createRepresentation(initialState);
   printRepresentation(representation)
