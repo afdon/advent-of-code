@@ -36,27 +36,25 @@ function part2(input: string) {
     return sortedByPriority.indexOf(badge)
   }
 
-  // let group: string[] = []
-
-  // for (let i = 0; i < lines.length; i++) {
-  //   group.push(lines[i])
-  //   if (group.length === 3) {
-  //     let badge = findBadge(group)
-  //     let badgePriority = findBadgePriority(badge)
-  //   }
-  // }
-
   let sumOfBadges: number = 0
   let badgePrioritiesArray: number[] = []
+  // let sumOfBadgePrioritiesArray = badgePrioritiesArray.reduce()
 
   const process = (lines: string[]) => {
     let group = lines.splice(0, 3)
     let badge = findBadge(group)
     let badgePriority = findBadgePriority(badge)
-    return badgePriority
+    badgePrioritiesArray.push(badgePriority)
+    console.log("badgePrioritiesArray: ", badgePrioritiesArray)
+    sumOfBadges = sumOfBadges + badgePriority
+    return sumOfBadges
   }
 
   while (lines.length > 1) process(lines)
+
+  if (lines.length === 0) {
+    console.log("the sum of all badge priorities: ", sumOfBadges)
+  }
 
 }
 
