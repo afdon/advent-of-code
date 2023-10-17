@@ -17,8 +17,6 @@ function part1(input: string) {
   const stackLine = initialState[initialState.length - 2];
   const charPositions = getCharPositions(stackLine);
 
-  // const numOfStacks = getNumberOfStacks(initialState);
-
   const representation: string[][] = createRepresentation(initialState);
   printRepresentation(representation)
 
