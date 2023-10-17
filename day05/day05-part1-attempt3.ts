@@ -24,7 +24,7 @@ function part1(input: string) {
   let cleaned = cleanLine(initialState[0]);
 //   console.log("cleaned:", cleaned);
 
-  const representation = createRepresentation(initialState);
+  const representation: string[][] = createRepresentation(initialState);
 //   console.log("representation", representation)
 
   printRepresentation(representation)
@@ -37,8 +37,8 @@ function part1(input: string) {
 
 //// helper functions
 
-function printRepresentation(rep: []) {
-    rep.map((e: [], i: number) => {
+function printRepresentation(rep: string[][]) {
+    rep.map((e: string[], i: number) => {
         console.log(`this is index ${i}, stack #${i + 1}:`, e)
     })
 }
