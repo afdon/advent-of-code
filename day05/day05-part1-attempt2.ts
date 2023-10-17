@@ -23,24 +23,33 @@ function part1(input: string) {
     console.log(`charPositions:`, charPositions)
 
     const numOfStacks = getNumberOfStacks(initialState)
+    
+    let cleaned = cleanLine(initialState[0])
+    console.log("cleaned:", cleaned)
 
-    // const representation = createRepresentation(initialState)
+    const representation = createRepresentation(initialState)
     // console.log("representation", representation)
 
 }
 
 function createRepresentation(initial) {
-    // const numOfStacks = getNumberOfStacks(initial)
 
-    // const linesToProcess = initial.slice(0, -2) // exclude the stack line and the empty line
+    const linesToProcess = initial.slice(0, -2) // exclude the stack line and the empty line
 
+    // boxesArray is an array with length = numStacks = an array with 9 elements
+    let boxesArray: any[][] = new Array(getNumberOfStacks(initial)).fill([])
+    // console.log("boxesArray", boxesArray)
+    
     // go through each line, starting from the end.
-
-    // let boxesArray = new Array(getNumberOfStacks(initial))
-
-//     for (let i = linesToProcess.length - 1; i <= 0; i--) {
-
-// }
+    for (let i = linesToProcess.length - 1; i >= 0; i--) {
+        let clean = cleanLine(linesToProcess[i])
+        for (let j = 0; j < clean.length; j++) {
+            boxesArray[j].push(clean[j])
+            // console.log("boxesArray[j]:", boxesArray[j])
+            // console.log("boxesArray", boxesArray)
+        }
+}
+console.log("done! boxesArray:", boxesArray)
 }
 
 //// wip
@@ -63,7 +72,7 @@ function getCharPositions(line: string) {
 
     line.split("").map(char => {
         if (isNaN(parseInt(char))) {
-            console.log(`This char: ${char} is not a number.`, char)
+            console.log(`This char: ${char} is not a number.`)
         } else {
             console.log("char:", char)
             let index: number = line.indexOf(char)
