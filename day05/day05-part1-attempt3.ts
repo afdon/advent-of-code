@@ -37,8 +37,8 @@ function part1(input: string) {
 
 //// helper functions
 
-function printRepresentation(rep: any) {
-    rep.map((e, i) => {
+function printRepresentation(rep: []) {
+    rep.map((e: [], i: number) => {
         console.log(`this is index ${i}, stack #${i + 1}:`, e)
     })
 }
