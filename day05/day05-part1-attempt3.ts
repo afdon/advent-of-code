@@ -26,15 +26,19 @@ function part1(input: string) {
 
   const representation = createRepresentation(initialState);
   console.log("representation", representation)
+
+  printRepresentation(representation)
 }
 
 
 
-
-
-
-
 //// wip
+
+function printRepresentation(rep: any) {
+    rep.map((e, i) => {
+        console.log(`this is index ${i}:`, e)
+    })
+}
 
 //// helper functions
 
