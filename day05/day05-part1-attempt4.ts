@@ -9,6 +9,8 @@ fs.readFile("input.txt", "utf8", (err, data) => {
   part1(data);
 });
 
+let state
+
 function part1(input: string) {
   const initialState = input.split("\n").slice(0, 10);
 
@@ -18,6 +20,11 @@ function part1(input: string) {
 
   const representation: string[][] = createRepresentation(initialState);
   printRepresentation(representation)
+  // set the state to the representation.
+  if (representation) {
+    state = representation
+  console.log(`initial state:`, state)
+  }
 
   const instructions = input.split("\n").slice(10);
   console.log(`There are ${instructions.length} tasks`)
@@ -33,7 +40,17 @@ function performTask(task: {
   from: number;
   to: number;
 }) {
+  let boxesToMove: number = task.move
+  let fromStackIndex: number = task.from - 1
+  let toStackIndex: number = task.to - 1
 
+  for (let i = boxesToMove; i < 0; i--) {
+    // perform the task i number of times, where i = boxesToMove.
+    let removed = state[fromStackIndex].pop()
+    state[toStackIndex].push(removed)
+    printRepresentation(state)
+    console.log("done")
+  }
 }
 
 function parseTask(str: string): {
