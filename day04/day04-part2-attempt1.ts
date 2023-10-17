@@ -18,15 +18,7 @@ function checkOverlap(range1: string, range2: string): boolean {
     const range2start = parseInt(range2.split("-")[0])
     // const range2end = parseInt(range2.split("-")[1])
 
-    // if range2 has a start or end that is within range 1, inclusive.
-
-    // if range1start is less than range2start, and range1end is more than range2start
-    // if (range1start <= range2start && range1end >= range2start) return true
-    // if range1start is less than range2start, and range1end 
-
     return range1start <= range2start && range1end >= range2start
-
-    // return range1start <= range2start && range1end >= range2end
 
 }
 
