@@ -52,6 +52,7 @@ function performTask(task: {
     let removed = state[fromStackIndex].pop()
     state[toStackIndex].push(removed)
     printRepresentation(state)
+    console.log(`done printing. index 3 has ${state[3].length} boxes; index 4 has ${state[4].length} boxes.`)
   }
 }
 
@@ -79,6 +80,13 @@ function parseTask(str: string): {
 
 function printRepresentation(rep: string[][]) {
     rep.map((e: string[], i: number) => {
+
+        // e = e.filter((e, i) => {
+        //     if (e[i] !== " ") {return e[i]}
+        // })
+
+        e = e.filter(e => e !== " ")
+
         console.log(`this is index ${i}, stack #${i + 1}:`, e)
     })
 }
