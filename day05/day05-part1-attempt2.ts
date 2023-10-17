@@ -20,6 +20,11 @@ function part1(input: string) {
     const instructions = input.split("\n").slice(10)
     // console.log("instructions: ", instructions)
 
+    const stackLine = initialState[initialState.length - 2]
+    console.log("stackLine:", stackLine)
+    const charPositions = getCharPositions(stackLine)
+    console.log(`charPositions:`, charPositions)
+
     // console.log("initialState's type is:", typeof initialState)
     const numOfStacks = getNumberOfStacks(initialState)
     // console.log ("number of stacks:", numOfStacks)
@@ -27,13 +32,13 @@ function part1(input: string) {
     const representation = createRepresentation(initialState)
     console.log("representation", representation)
 
-    let task = {
-        "number of stacks": numOfStacks,
-        "initialState": initialState,
-        "instructions": instructions
-    }
+    // let task = {
+    //     "number of stacks": numOfStacks,
+    //     "initialState": initialState,
+    //     "instructions": instructions
+    // }
 
-    console.log("task:", task)
+    // console.log("task:", task)
 }
 
 function createRepresentation(initial) {
@@ -45,23 +50,28 @@ function createRepresentation(initial) {
 
     let boxesArray = new Array(getNumberOfStacks(initial))
 
-    for (let i = linesToProcess.length - 1; i <= 0; i--) {
+//     for (let i = linesToProcess.length - 1; i <= 0; i--) {
 
-}
+// }
 }
 
 //// wip
 
 function getCharPositions(line: string) {
-    let charIndices: any[] = []
+
+    let charIndices: number[] = []
     line.split("").map(char => {
         if (isNaN(parseInt(char))) {
-            console.log("This char is not a number.", char)
+            console.log(`This char: ${char} is not a number.`, char)
         } else {
-            let position = line.indexOf(char)
-            charIndices.push(position)
+            console.log("char:", char)
+            let index: number = line.indexOf(char)
+            console.log("position:", index)
+            charIndices.push(index)
         }
     })
+    console.log(charIndices)
+    return charIndices
 }
 
 //// helper functions
