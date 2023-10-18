@@ -72,21 +72,28 @@ function listRootContents(lines: string[]): string[] {
 }
 
 function validate(string: string) {
+    let command: string | undefined
   switch (true) {
     case /^\$\scd\s\S+/.test(string):
         if (/^\$\scd\s\//) {
             console.log("cd /")
+            command = "cd root"
             break
         } else if (/^\$\scd\s\.\./) {
             console.log("cd ..")
+            command = "cd up"
             break
+        } else {
+            console.log("cd into")
+            command = "cd into"
+            break;
         }
-      console.log("cd into a named directory");
-      break;
     case /^\$\sls/.test(string):
       console.log("ls.");
+      command = "ls"
       break;
     default:
       console.log("Unknown");
+      command = "unknown"
   }
 }
