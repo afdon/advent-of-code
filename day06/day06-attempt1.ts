@@ -25,7 +25,7 @@ function part1(input: string) {
         marker = store.join()
         markerReady = true
         charsProcessed = i + 1
-        console.log("chars processed:", i)
+        console.log("chars processed:", charsProcessed)
       } else {
         store.shift()
         markerReady = false
