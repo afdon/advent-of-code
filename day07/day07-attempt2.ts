@@ -105,7 +105,13 @@ function validate(string: string) {
 // unused
 
 function printFolderContents(contents: string[]): void {
-    contents.forEach((content, i) => {
-        console.log(`Content #${i + 1} at index ${i}: ${content}`);
+    let list = contents.map((content, i) => {
+        // add padded index for pretty printing
+        console.log(`Content #${padIndex(i)} at index ${padIndex(i + 1)}: ${content}`);
     });
+}
+
+// padStart for sigle digit indices
+function padIndex(index: number): string {
+    return index.toString().padStart(2, '0');
 }
