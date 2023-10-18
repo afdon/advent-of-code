@@ -49,13 +49,13 @@ function getTopBoxes(state) {
     return result
 }
 
-// function performTask(task: { move: number; from: number; to: number }) {
-//   let boxesToMove: number = task.move;
-//   let fromStackIndex: number = task.from - 1;
-//   let toStackIndex: number = task.to - 1;
+function performTask(task: { move: number; from: number; to: number }) {
+  let boxesToMove: number = task.move;
+  let fromStackIndex: number = task.from - 1;
+  let toStackIndex: number = task.to - 1;
 
-//   // print instructions to console
-//   console.log(`move ${boxesToMove} from ${fromStackIndex} to ${toStackIndex}`);
+  // print instructions to console
+  console.log(`move ${boxesToMove} from ${fromStackIndex} to ${toStackIndex}`);
 
 //   for (let i = boxesToMove; i > 0; i--) {
 //     // perform the task i number of times, where i = boxesToMove.
@@ -66,7 +66,11 @@ function getTopBoxes(state) {
 //       `done printing. index 3 has ${state[3].length} boxes; index 4 has ${state[4].length} boxes.`
 //     );
 //   }
-// }
+
+// slice the last {boxesToMove} number of elements from the {fromStackIndex} stack. Then move it to the {toStackIndex} array.
+let removed = state[fromStackIndex].splice(state[fromStackIndex].length - boxesToMove)
+
+}
 
 function parseTask(str: string): {
   move: number;
