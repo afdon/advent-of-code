@@ -17,6 +17,9 @@ function part1(input: string) {
   console.log(rootContents);
 
   validate(lines[0])
+
+//   printFolderContents(rootContents)
+
 }
 
 // const root = {
@@ -70,6 +73,12 @@ function listRootContents(lines: string[]): string[] {
   }
   return rootContents;
 }
+
+// function printFolderContents(contents: string[]): void {
+//     let list = contents.map((content, i) => {
+//         console.log(`Content #${i + 1} at index ${i}: ${content[i]}`)
+//     })
+// }
 
 function validate(string: string) {
     let command: string | undefined
