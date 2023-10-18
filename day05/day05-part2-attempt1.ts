@@ -69,6 +69,10 @@ function performTask(task: { move: number; from: number; to: number }) {
 
 // slice the last {boxesToMove} number of elements from the {fromStackIndex} stack. Then move it to the {toStackIndex} array.
 let removed = state[fromStackIndex].splice(state[fromStackIndex].length - boxesToMove)
+// add removed to state[toStackIndex]
+state[toStackIndex] = [...state[toStackIndex], ...removed]
+
+console.log("removed:", removed)
 
 }
 
