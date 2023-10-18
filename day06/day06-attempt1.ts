@@ -24,7 +24,7 @@ function part1(input: string) {
       if (isUnique(store)) {
         marker = store.join()
         markerReady = true
-        charsProcessed = i
+        charsProcessed = i + 1
         console.log("chars processed:", i)
       } else {
         store.shift()
