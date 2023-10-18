@@ -16,9 +16,9 @@ function part1(input: string) {
   let rootContents = listRootContents(lines);
   console.log(rootContents);
 
+  printFolderContents(rootContents)
+  
   validate(lines[0])
-
-//   printFolderContents(rootContents)
 
 }
 
@@ -74,12 +74,6 @@ function listRootContents(lines: string[]): string[] {
   return rootContents;
 }
 
-// function printFolderContents(contents: string[]): void {
-//     let list = contents.map((content, i) => {
-//         console.log(`Content #${i + 1} at index ${i}: ${content[i]}`)
-//     })
-// }
-
 function validate(string: string) {
     let command: string | undefined
   switch (true) {
@@ -105,4 +99,13 @@ function validate(string: string) {
       console.log("Unknown");
       command = "unknown"
   }
+}
+
+
+// unused
+
+function printFolderContents(contents: string[]): void {
+    contents.forEach((content, i) => {
+        console.log(`Content #${i + 1} at index ${i}: ${content}`);
+    });
 }
