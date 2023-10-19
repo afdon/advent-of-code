@@ -21,65 +21,9 @@ function part1(input: string) {
   let children: string[] = findChildren("/", lines)
   printFolderContents(children)
 
-//   validate(lines[0]);
-//   validate(lines[2]); // unknown
-//   validate(lines[3]); // unknown
-//   validate(lines[4]); // unknown
-
-validate("dir d")
 }
 
-// const root = {
-//   child1: {}
-//   child2: {}
-// }
 
-// const root = {
-//   name: "/",
-//   children: [child1, child2]
-// }
-
-// const child1 = {
-//   name: "child1",
-//   children: []
-// }
-
-// find the contents of the parent folder.
-
-function listRootContents(lines: string[]): string[] {
-  let rootContents: string[] = [];
-  // just assume there's a "$ cd /" command somewhere, followed by "$ ls" on the next line
-  for (let i = 0; i < lines.length; i++) {
-    if (
-      lines[i].charAt(0) === "$" &&
-      lines[i].charAt(2) === "c" &&
-      lines[i].charAt(3) === "d" &&
-      lines[i].charAt(5) === "/"
-    ) {
-      if (
-        lines[i + 1].charAt(0) === "$" &&
-        lines[i + 1].charAt(2) === "l" &&
-        lines[i + 1].charAt(3) === "s"
-      ) {
-        // while the next line begins with "dir" or a number, push that line into an array.
-        let j = i + 2;
-        console.log(
-          `lines[j] is: ${lines[j]} and its type is:`,
-          typeof lines[j]
-        );
-        while (lines[j].charAt(0) !== "$") {
-          console.log(
-            `typeof lines[j]: ${typeof lines[j]}; lines[j]: ${lines[j]}`
-          );
-          rootContents.push(lines[j]);
-          j++;
-          console.log(`j:`, j);
-        }
-      }
-    }
-  }
-  return rootContents;
-}
 
 function validate(string: string): string {
   let command: string | undefined;
@@ -126,9 +70,10 @@ function findChildren(dir: string, lines: string[]): any {
   // find where we cd into that dir, and ls. Start grabbing from the next line
   for (let i = 0; i < lines.length; i++) {
     if (
-        // validate(lines[i]) === "cd into" && 
-        lines[i].includes(`$cd ${dirName}`) && 
-        validate(lines[i + 1]) === "ls"
+        // lines[i].includes(`$ cd ${dirName}`) && 
+        // lines[i].includes(`$ ls`) 
+        lines[i] === `$ cd ${dirName}` 
+        && lines[i + 1] === `$ ls`
         ) {
         console.log("found")
           // get all the non-commands (doesn't start with $) after the cd and ls lines
@@ -138,13 +83,11 @@ function findChildren(dir: string, lines: string[]): any {
             j++
         }
     }
-    console.log(`children: ${children}`)
+    console.log(`children is typeof ${typeof children}: ${children}`, children)
     return children
   }
   return null
 }
-
-// unused
 
 function printFolderContents(contents: string[]): void {
   let list = contents.map((content, i) => {
@@ -159,3 +102,40 @@ function printFolderContents(contents: string[]): void {
 function padIndex(index: number): string {
   return index.toString().padStart(2, "0");
 }
+
+// find the contents of the parent folder.
+
+function listRootContents(lines: string[]): string[] {
+    let rootContents: string[] = [];
+    // just assume there's a "$ cd /" command somewhere, followed by "$ ls" on the next line
+    for (let i = 0; i < lines.length; i++) {
+      if (
+        lines[i].charAt(0) === "$" &&
+        lines[i].charAt(2) === "c" &&
+        lines[i].charAt(3) === "d" &&
+        lines[i].charAt(5) === "/"
+      ) {
+        if (
+          lines[i + 1].charAt(0) === "$" &&
+          lines[i + 1].charAt(2) === "l" &&
+          lines[i + 1].charAt(3) === "s"
+        ) {
+          // while the next line begins with "dir" or a number, push that line into an array.
+          let j = i + 2;
+          console.log(
+            `lines[j] is: ${lines[j]} and its type is:`,
+            typeof lines[j]
+          );
+          while (lines[j].charAt(0) !== "$") {
+            console.log(
+              `typeof lines[j]: ${typeof lines[j]}; lines[j]: ${lines[j]}`
+            );
+            rootContents.push(lines[j]);
+            j++;
+            console.log(`j:`, j);
+          }
+        }
+      }
+    }
+    return rootContents;
+  }
