@@ -10,6 +10,9 @@ fs.readFile("input.txt", "utf8", (err, data) => {
   part1(data);
 });
 
+let filesizes: number[] = []
+let total: number = 0
+
 function part1(input: string) {
   const lines = input.split("\n");
 
@@ -21,40 +24,30 @@ function part1(input: string) {
   let children: string[] = findChildren("/", lines)
   printFolderContents(children)
 
+  // if the children contains any directories, find their children.
+  // else (it's a file), add its filesize to the total.
+
+  // need recursion?
+
+    recurse(children, lines)
+
+    // for (let i = 0; i < children.length; i++) {
+        
+    // }
+
 }
 
+function grabNumber(line: string): number {
+    let number = parseInt(line)
+    return number
+}
 
-
-function validate(string: string): string {
-  let command: string | undefined;
-  switch (true) {
-    case /^\$\scd\s\S+/.test(string):
-      if (/^\$\scd\s\//) {
-        console.log("cd /");
-        command = "cd root";
-        return command
-        // break;
-      } else if (/^\$\scd\s\.\./) {
-        console.log("cd ..");
-        command = "cd up";
-        return command
-        // break;
-      } else {
-        console.log("cd into");
-        command = "cd into";
-        return command
-        // break;
-      }
-    case /^\$\sls/.test(string):
-      console.log("ls.");
-      command = "ls";
-      return command
-    //   break;
-    default:
-      console.log("Unknown");
-      command = "unknown";
-      return command
-  }
+function recurse(list: string[], lines: string[]) {
+    for (let i = 0; i < list.length; i++) {
+        let children = findChildren(list[i], lines)
+        if (!children || children.length === 0) return
+        if (children) recurse(children, lines)
+    }
 }
 
 // given a directory, find its children
@@ -70,8 +63,6 @@ function findChildren(dir: string, lines: string[]): any {
   // find where we cd into that dir, and ls. Start grabbing from the next line
   for (let i = 0; i < lines.length; i++) {
     if (
-        // lines[i].includes(`$ cd ${dirName}`) && 
-        // lines[i].includes(`$ ls`) 
         lines[i] === `$ cd ${dirName}` 
         && lines[i + 1] === `$ ls`
         ) {
@@ -79,7 +70,12 @@ function findChildren(dir: string, lines: string[]): any {
           // get all the non-commands (doesn't start with $) after the cd and ls lines
         let j = i + 2
         while (lines[j].charAt(0) !== "$") {
-            children.push(lines[j])
+            if (typeof parseInt(lines[j].charAt(0)) === "number") {
+                filesizes.push(parseInt(lines[j])) // push the number into filesize array
+                total = total + parseInt(lines[j]) // add the filesize to the total
+            } else {
+                children.push(lines[j])
+            }
             j++
         }
     }
@@ -138,4 +134,38 @@ function listRootContents(lines: string[]): string[] {
       }
     }
     return rootContents;
+  }
+
+
+
+function validate(string: string): string {
+    let command: string | undefined;
+    switch (true) {
+      case /^\$\scd\s\S+/.test(string):
+        if (/^\$\scd\s\//) {
+          console.log("cd /");
+          command = "cd root";
+          return command
+          // break;
+        } else if (/^\$\scd\s\.\./) {
+          console.log("cd ..");
+          command = "cd up";
+          return command
+          // break;
+        } else {
+          console.log("cd into");
+          command = "cd into";
+          return command
+          // break;
+        }
+      case /^\$\sls/.test(string):
+        console.log("ls.");
+        command = "ls";
+        return command
+      //   break;
+      default:
+        console.log("Unknown");
+        command = "unknown";
+        return command
+    }
   }
