@@ -31,9 +31,20 @@ function part1(input: string) {
 
     recurse(children, lines)
 
+    console.log(`filesizes: ${filesizes}`)
+    console.log(`total: ${total}`)
+
     // for (let i = 0; i < children.length; i++) {
         
     // }
+
+}
+
+function findAllDirectories() {
+    
+}
+
+function findDirectoriesUnder100k() {
 
 }
 
@@ -45,7 +56,9 @@ function grabNumber(line: string): number {
 function recurse(list: string[], lines: string[]) {
     for (let i = 0; i < list.length; i++) {
         let children = findChildren(list[i], lines)
-        if (!children || children.length === 0) return
+        if (!children || children.length === 0) {
+            console.log("no children")
+        }
         if (children) recurse(children, lines)
     }
 }
@@ -70,12 +83,13 @@ function findChildren(dir: string, lines: string[]): any {
           // get all the non-commands (doesn't start with $) after the cd and ls lines
         let j = i + 2
         while (lines[j].charAt(0) !== "$") {
-            if (typeof parseInt(lines[j].charAt(0)) === "number") {
+            if (lines[j].charAt(0) === "d") {
+                children.push(lines[j])
+            } else if (typeof parseInt(lines[j].charAt(0)) === "number") {
+                console.log(`lines[j] ${lines[j]}`)
                 filesizes.push(parseInt(lines[j])) // push the number into filesize array
                 total = total + parseInt(lines[j]) // add the filesize to the total
-            } else {
-                children.push(lines[j])
-            }
+            } 
             j++
         }
     }
