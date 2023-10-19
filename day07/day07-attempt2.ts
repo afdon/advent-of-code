@@ -12,6 +12,8 @@ fs.readFile("input.txt", "utf8", (err, data) => {
 
 let filesizes: number[] = []
 let total: number = 0
+let directories: string[] = []
+let storage: {} = {}
 
 function part1(input: string) {
   const lines = input.split("\n");
@@ -38,13 +40,30 @@ function part1(input: string) {
         
     // }
 
+    directories = findAllDirectories(lines)
+    console.log(`directories: ${directories}`)
+    // let directoriesSet = new Set(directories)
+    // console.log(`set of directories: ${directoriesSet}`)
+    // console.log(`typeof directories: ${typeof directories}; size: ${directories.length}`)
+    // console.log(`typeof directoriesSet: ${typeof directoriesSet}; size: ${directoriesSet.size}`)
+
+    console.log(`storage: ${storage}`)
+    console.log("storage", storage)
+
 }
 
-function findAllDirectories() {
+function findAllDirectories(lines: string[]): string[] {
+    let directories: string[] = []
+    for (let i = 0; i < lines.length; i++) {
+        if (lines[i].charAt(0) === "d") {
+            directories.push(lines[i])
+        }
+    }
     
+    return directories
 }
 
-function findDirectoriesUnder100k() {
+function tallyFilesWithin(dir: string, lines: string[]) {
 
 }
 
@@ -87,6 +106,8 @@ function findChildren(dir: string, lines: string[]): any {
                 children.push(lines[j])
             } else if (typeof parseInt(lines[j].charAt(0)) === "number") {
                 console.log(`lines[j] ${lines[j]}`)
+                if (!storage[dirName]) { storage[dirName] = 0 }
+                storage[dirName] += parseInt(lines[j])
                 filesizes.push(parseInt(lines[j])) // push the number into filesize array
                 total = total + parseInt(lines[j]) // add the filesize to the total
             } 
