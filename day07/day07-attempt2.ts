@@ -16,10 +16,17 @@ function part1(input: string) {
   let rootContents = listRootContents(lines);
   console.log(rootContents);
 
-  printFolderContents(rootContents)
-  
-  validate(lines[0])
+  printFolderContents(rootContents);
 
+  let children: string[] = findChildren("/", lines)
+  printFolderContents(children)
+
+//   validate(lines[0]);
+//   validate(lines[2]); // unknown
+//   validate(lines[3]); // unknown
+//   validate(lines[4]); // unknown
+
+validate("dir d")
 }
 
 // const root = {
@@ -74,44 +81,81 @@ function listRootContents(lines: string[]): string[] {
   return rootContents;
 }
 
-function validate(string: string) {
-    let command: string | undefined
+function validate(string: string): string {
+  let command: string | undefined;
   switch (true) {
     case /^\$\scd\s\S+/.test(string):
-        if (/^\$\scd\s\//) {
-            console.log("cd /")
-            command = "cd root"
-            break
-        } else if (/^\$\scd\s\.\./) {
-            console.log("cd ..")
-            command = "cd up"
-            break
-        } else {
-            console.log("cd into")
-            command = "cd into"
-            break;
-        }
+      if (/^\$\scd\s\//) {
+        console.log("cd /");
+        command = "cd root";
+        return command
+        // break;
+      } else if (/^\$\scd\s\.\./) {
+        console.log("cd ..");
+        command = "cd up";
+        return command
+        // break;
+      } else {
+        console.log("cd into");
+        command = "cd into";
+        return command
+        // break;
+      }
     case /^\$\sls/.test(string):
       console.log("ls.");
-      command = "ls"
-      break;
+      command = "ls";
+      return command
+    //   break;
     default:
       console.log("Unknown");
-      command = "unknown"
+      command = "unknown";
+      return command
   }
 }
 
+// given a directory, find its children
+
+function findChildren(dir: string, lines: string[]): any {
+    let children: string[] = []
+  let dirName = dir;
+  // get the dir name, if the whole input is supplied
+  if (/^dir\s*/.test(dir)) {
+    dirName = dir.slice(4);
+  }
+  console.log(`The directory name is ${dirName}`)
+  // find where we cd into that dir, and ls. Start grabbing from the next line
+  for (let i = 0; i < lines.length; i++) {
+    if (
+        // validate(lines[i]) === "cd into" && 
+        lines[i].includes(`$cd ${dirName}`) && 
+        validate(lines[i + 1]) === "ls"
+        ) {
+        console.log("found")
+          // get all the non-commands (doesn't start with $) after the cd and ls lines
+        let j = i + 2
+        while (lines[j].charAt(0) !== "$") {
+            children.push(lines[j])
+            j++
+        }
+    }
+    console.log(`children: ${children}`)
+    return children
+  }
+  return null
+}
 
 // unused
 
 function printFolderContents(contents: string[]): void {
-    let list = contents.map((content, i) => {
-        // add padded index for pretty printing
-        console.log(`Content #${padIndex(i)} at index ${padIndex(i + 1)}: ${content}`);
-    });
+  let list = contents.map((content, i) => {
+    // add padded index for pretty printing
+    console.log(
+      `Content #${padIndex(i)} at index ${padIndex(i + 1)}: ${content}`
+    );
+  });
 }
 
 // padStart for sigle digit indices
 function padIndex(index: number): string {
-    return index.toString().padStart(2, '0');
+  return index.toString().padStart(2, "0");
 }
