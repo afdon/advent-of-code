@@ -23,7 +23,8 @@ function part1(input: string) {
 
   printFolderContents(rootContents);
 
-  let children: string[] = findChildren("/", lines)
+  let children: string[] = findChildDirs("/", lines)
+  
   printFolderContents(children)
 
   // if the children contains any directories, find their children.
@@ -42,10 +43,6 @@ function part1(input: string) {
 
     directories = findAllDirectories(lines)
     console.log(`directories: ${directories}`)
-    // let directoriesSet = new Set(directories)
-    // console.log(`set of directories: ${directoriesSet}`)
-    // console.log(`typeof directories: ${typeof directories}; size: ${directories.length}`)
-    // console.log(`typeof directoriesSet: ${typeof directoriesSet}; size: ${directoriesSet.size}`)
 
     console.log(`storage: ${storage}`)
     console.log("storage", storage)
@@ -59,7 +56,6 @@ function findAllDirectories(lines: string[]): string[] {
             directories.push(lines[i])
         }
     }
-    
     return directories
 }
 
@@ -72,9 +68,10 @@ function grabNumber(line: string): number {
     return number
 }
 
-function recurse(list: string[], lines: string[]) {
+function recurse(list: string[], lines: string[]): void {
+    let children
     for (let i = 0; i < list.length; i++) {
-        let children = findChildren(list[i], lines)
+        children = findChildDirs(list[i], lines)
         if (!children || children.length === 0) {
             console.log("no children")
         }
@@ -82,9 +79,13 @@ function recurse(list: string[], lines: string[]) {
     }
 }
 
+function hasNoChildren() {
+    
+}
+
 // given a directory, find its children
 
-function findChildren(dir: string, lines: string[]): any {
+function findChildDirs(dir: string, lines: string[]): any {
     let children: string[] = []
   let dirName = dir;
   // get the dir name, if the whole input is supplied
@@ -107,6 +108,7 @@ function findChildren(dir: string, lines: string[]): any {
             } else if (typeof parseInt(lines[j].charAt(0)) === "number") {
                 console.log(`lines[j] ${lines[j]}`)
                 if (!storage[dirName]) { storage[dirName] = 0 }
+                console.log("adding", parseInt(lines[j]))
                 storage[dirName] += parseInt(lines[j])
                 filesizes.push(parseInt(lines[j])) // push the number into filesize array
                 total = total + parseInt(lines[j]) // add the filesize to the total
@@ -173,34 +175,34 @@ function listRootContents(lines: string[]): string[] {
 
 
 
-function validate(string: string): string {
-    let command: string | undefined;
-    switch (true) {
-      case /^\$\scd\s\S+/.test(string):
-        if (/^\$\scd\s\//) {
-          console.log("cd /");
-          command = "cd root";
-          return command
-          // break;
-        } else if (/^\$\scd\s\.\./) {
-          console.log("cd ..");
-          command = "cd up";
-          return command
-          // break;
-        } else {
-          console.log("cd into");
-          command = "cd into";
-          return command
-          // break;
-        }
-      case /^\$\sls/.test(string):
-        console.log("ls.");
-        command = "ls";
-        return command
-      //   break;
-      default:
-        console.log("Unknown");
-        command = "unknown";
-        return command
-    }
-  }
+// function validate(string: string): string {
+//     let command: string | undefined;
+//     switch (true) {
+//       case /^\$\scd\s\S+/.test(string):
+//         if (/^\$\scd\s\//) {
+//           console.log("cd /");
+//           command = "cd root";
+//           return command
+//           // break;
+//         } else if (/^\$\scd\s\.\./) {
+//           console.log("cd ..");
+//           command = "cd up";
+//           return command
+//           // break;
+//         } else {
+//           console.log("cd into");
+//           command = "cd into";
+//           return command
+//           // break;
+//         }
+//       case /^\$\sls/.test(string):
+//         console.log("ls.");
+//         command = "ls";
+//         return command
+//       //   break;
+//       default:
+//         console.log("Unknown");
+//         command = "unknown";
+//         return command
+//     }
+//   }
