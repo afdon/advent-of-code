@@ -1,5 +1,10 @@
 // Find all of the directories with a total size of at most 100000. What is the sum of the total sizes of those directories?
 
+  // if the children contains any directories, find their children.
+  // If the children do not contain any directories, print their file size
+  // add the file size to each of its parents, up the chain.
+  // else (it's a file), add its filesize to the total.
+
 import fs from "fs";
 
 fs.readFile("input.txt", "utf8", (err, data) => {
@@ -10,8 +15,6 @@ fs.readFile("input.txt", "utf8", (err, data) => {
   part1(data);
 });
 
-let filesizes: number[] = []
-let total: number = 0
 let directories: string[] = []
 let storage: {} = {}
 
@@ -21,32 +24,9 @@ function part1(input: string) {
   let rootContents = listRootContents(lines);
   console.log(rootContents);
 
-//   printFolderContents(rootContents);
-
-  let children: string[] = findChildDirs("/", lines)
-  
-//   printFolderContents(children)
-
-  // if the children contains any directories, find their children.
-  // If the children do not contain any directories, print their file size
-  // add the file size to each of its parents, up the chain.
-  // else (it's a file), add its filesize to the total.
-
-  // need recursion?
-
-    recurse(children, lines)
-
-    // console.log(`filesizes: ${filesizes}`)
-    // console.log(`total: ${total}`)
-
-    // for (let i = 0; i < children.length; i++) {
-        
-    // }
-
     directories = findAllDirectories(lines)
     console.log(`directories: ${directories}`)
 
-    // console.log(`storage: ${storage}`)
     console.log("storage", storage)
 
 }
@@ -62,23 +42,14 @@ function findAllDirectories(lines: string[]): string[] {
 }
 
 function tallyFilesWithin(dir: string, lines: string[]) {
-
+  if (dir.charAt(0) !== "d") {
+    
+  }
 }
 
 function grabNumber(line: string): number {
     let number = parseInt(line)
     return number
-}
-
-let childDirs
-function recurse(list: string[], lines: string[]): void {
-    for (let i = 0; i < list.length; i++) {
-        childDirs = findChildDirs(list[i], lines)
-        if (!childDirs || childDirs.length === 0) {
-            console.log("no children")
-        }
-        if (childDirs) recurse(childDirs, lines)
-    }
 }
 
 function hasNoChildren() {
@@ -95,6 +66,9 @@ function findChildDirs(dir: string, lines: string[]): any {
     dirName = dir.slice(4);
   }
   console.log(`The directory name is ${dirName}`)
+
+
+
   // find where we cd into that dir, and ls. Start grabbing from the next line
   for (let i = 0; i < lines.length; i++) {
     if (
@@ -104,7 +78,7 @@ function findChildDirs(dir: string, lines: string[]): any {
         console.log("found")
           // get all the non-commands (doesn't start with $) after the cd and ls lines
         let j = i + 2
-        while (i < lines.length && lines[j].charAt(0) !== "$") {
+        while (j < lines.length && lines[j].charAt(0) !== "$") {
             if (i > lines.length - 1) return // didn't stop the loop
             if (lines[j].charAt(0) === "d") {
                 children.push(lines[j])
@@ -113,8 +87,8 @@ function findChildDirs(dir: string, lines: string[]): any {
                 if (!storage[dirName]) { storage[dirName] = 0 }
                 console.log("adding", parseInt(lines[j]))
                 storage[dirName] += parseInt(lines[j])
-                filesizes.push(parseInt(lines[j])) // push the number into filesize array
-                total = total + parseInt(lines[j]) // add the filesize to the total
+                // filesizes.push(parseInt(lines[j])) // push the number into filesize array÷sdd
+                // total = total + parseInt(lines[j]) // add the filesize to the total
             } else {
                 console.log("oops", j)
             }
@@ -122,8 +96,8 @@ function findChildDirs(dir: string, lines: string[]): any {
         }
     }
     console.log(`children is typeof ${typeof children}: ${children}`, children)
+    return children
 }
-return children
   return null
 }
 
@@ -142,6 +116,42 @@ function padIndex(index: number): string {
 }
 
 // find the contents of the parent folder.
+
+function getContents(lines: string[]): string[] {
+  let rootContents: string[] = [];
+  // just assume there's a "$ cd /" command somewhere, followed by "$ ls" on the next line
+  for (let i = 0; i < lines.length; i++) {
+    if (
+      lines[i].charAt(0) === "$" &&
+      lines[i].charAt(2) === "c" &&
+      lines[i].charAt(3) === "d" &&
+      lines[i].charAt(4) === " "
+    ) {
+      console.log("cd command")
+      if (
+        lines[i + 1].charAt(0) === "$" &&
+        lines[i + 1].charAt(2) === "l" &&
+        lines[i + 1].charAt(3) === "s"
+      ) {
+        // while the next line begins with "dir" or a number, push that line into an array.
+        let j = i + 2;
+        console.log(
+          `lines[j] is: ${lines[j]} and its type is:`,
+          typeof lines[j]
+        );
+        while (lines[j].charAt(0) !== "$") {
+          console.log(
+            `typeof lines[j]: ${typeof lines[j]}; lines[j]: ${lines[j]}`
+          );
+          rootContents.push(lines[j]);
+          j++;
+          console.log(`j:`, j);
+        }
+      }
+    }
+  }
+  return rootContents;
+}
 
 function listRootContents(lines: string[]): string[] {
     let rootContents: string[] = [];
@@ -177,35 +187,3 @@ function listRootContents(lines: string[]): string[] {
     }
     return rootContents;
   }
-
-// function validate(string: string): string {
-//     let command: string | undefined;
-//     switch (true) {
-//       case /^\$\scd\s\S+/.test(string):
-//         if (/^\$\scd\s\//) {
-//           console.log("cd /");
-//           command = "cd root";
-//           return command
-//           // break;
-//         } else if (/^\$\scd\s\.\./) {
-//           console.log("cd ..");
-//           command = "cd up";
-//           return command
-//           // break;
-//         } else {
-//           console.log("cd into");
-//           command = "cd into";
-//           return command
-//           // break;
-//         }
-//       case /^\$\sls/.test(string):
-//         console.log("ls.");
-//         command = "ls";
-//         return command
-//       //   break;
-//       default:
-//         console.log("Unknown");
-//         command = "unknown";
-//         return command
-//     }
-//   }
