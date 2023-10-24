@@ -1,3 +1,5 @@
+
+
 import fs from "fs";
 
 let input: string
@@ -17,20 +19,16 @@ fs.readFile('input.txt', 'utf8', (err, data) => {
 function part1(input: string) {
     const rows = input.split("\n")
 
-    const colLength = rows[0].length
     const rowLength = rows.length
-
+    const colLength = rows[0].length
+    
     // need: number of trees visible from outside the grid
-    // each tree can be visible from: Top, Below, Left, Right
 
     // each tree is visible from the...
     // T, iff all the trees of the same colIndex and a lower rowIndex are a lower number
     // B, iff all the trees of the same colIndex and a higher rowIndex are a lower number
     // L, iff all the trees of the same rowIndex and a lower colIndex are a lower number
     // R, iff all the trees of the same rowIndex and a higher colIndex are a lower number
-
-    // tree: [rowIndex, colIndex]
-    // trees on Top: 
 
     let visibleTotal: number = 0
     let treesVisible: number = 0
@@ -39,8 +37,6 @@ function part1(input: string) {
 
         let [rowIndex, colIndex] = tree
 
-        let treeHeight = getHeight(tree)
-
         let visible = {
             top: true,
             bottom: true,
@@ -48,52 +44,31 @@ function part1(input: string) {
             right: true,
         }
 
-        // let treesOnTop: tree[] = []
-        // let treesOnBottom: tree[] = []
-        // let treesOnLeft: tree[] = []
-        // let treesOnRight: tree[] = []
-
         for (let i = 0; i < rowIndex; i++ ) {
-            // if ([i, colIndex] > tree) { 
-                if (getHeight([i, colIndex]) > getHeight(tree)) {
+                if (getHeight([i, colIndex]) >= getHeight(tree)) {
                 visible.top = false; 
-                // break 
             }
-            // treesOnTop.push([i, colIndex])
-            // console.log(`adding ${[i, colIndex]} to treesOnTop: ${treesOnTop}.`)
         }
 
         for (let i = rowIndex + 1; i < rowLength; i++ ) {
-            // if ([i, colIndex] > tree) { 
-                if (getHeight([i, colIndex]) > getHeight(tree)) {
+                if (getHeight([i, colIndex]) >= getHeight(tree)) {
                 visible.bottom = false; 
-                // break 
-            }
-            // treesOnBottom.push([i, colIndex])
-            // console.log(`adding ${[i, colIndex]} to treesOnBottom: ${treesOnBottom}`)        
+            }     
         }
 
         for (let i = 0; i < colIndex; i++ ) {
-            // if ([rowIndex, i] > tree) { 
-                if (getHeight([rowIndex, i]) > getHeight(tree)) {
+                if (getHeight([rowIndex, i]) >= getHeight(tree)) {
                 visible.left = false; 
-                // break 
-            }
-            // treesOnLeft.push([rowIndex, i])
-            // console.log(`adding ${[rowIndex, i]} to treesOnLeft: ${treesOnLeft}`)        
+            }      
         }
 
-        for (let i = colIndex; i < colLength; i++ ) {
-            // if ([rowIndex, i] > tree) { 
-                if (getHeight([rowIndex, i]) > getHeight(tree)) {
+        for (let i = colIndex + 1; i < colLength; i++ ) {
+                if (getHeight([rowIndex, i]) >= getHeight(tree)) {
                 visible.right = false; 
-                // break 
             }
-            // treesOnRight.push([rowIndex, i])
-            // console.log(`adding ${[rowIndex, i]} to treesOnRight: ${treesOnRight}`)        
         }
+
         return visible
-    
     }
 
     const checkVisible = (tree: tree): boolean => {
