@@ -40,6 +40,8 @@ function part1(input: string) {
 
         let [rowIndex, colIndex] = tree
 
+        let treeHeight = getHeight(tree)
+
         let visible = {
             top: true,
             bottom: true,
@@ -47,13 +49,14 @@ function part1(input: string) {
             right: true,
         }
 
-        let treesOnTop: tree[] = []
-        let treesOnBottom: tree[] = []
-        let treesOnLeft: tree[] = []
-        let treesOnRight: tree[] = []
+        // let treesOnTop: tree[] = []
+        // let treesOnBottom: tree[] = []
+        // let treesOnLeft: tree[] = []
+        // let treesOnRight: tree[] = []
 
         for (let i = 0; i < rowIndex; i++ ) {
-            if ([i, colIndex] > tree) { 
+            // if ([i, colIndex] > tree) { 
+                if (getHeight([i, colIndex]) > getHeight(tree)) {
                 visible.top = false; 
                 // break 
             }
@@ -62,7 +65,8 @@ function part1(input: string) {
         }
 
         for (let i = rowIndex + 1; i < rowLength; i++ ) {
-            if ([i, colIndex] > tree) { 
+            // if ([i, colIndex] > tree) { 
+                if (getHeight([i, colIndex]) > getHeight(tree)) {
                 visible.bottom = false; 
                 // break 
             }
@@ -71,7 +75,8 @@ function part1(input: string) {
         }
 
         for (let i = 0; i < colIndex; i++ ) {
-            if ([rowIndex, i] > tree) { 
+            // if ([rowIndex, i] > tree) { 
+                if (getHeight([rowIndex, i]) > getHeight(tree)) {
                 visible.left = false; 
                 // break 
             }
@@ -80,7 +85,8 @@ function part1(input: string) {
         }
 
         for (let i = colIndex; i < colLength; i++ ) {
-            if ([rowIndex, i] > tree) { 
+            // if ([rowIndex, i] > tree) { 
+                if (getHeight([rowIndex, i]) > getHeight(tree)) {
                 visible.right = false; 
                 // break 
             }
@@ -91,7 +97,7 @@ function part1(input: string) {
     
     }
 
-    const checkVisible = (tree: tree) => {
+    const checkVisible = (tree: tree): boolean => {
         let [rowIndex, colIndex] = tree
 
         let viz = getVisibility(tree)
@@ -99,7 +105,10 @@ function part1(input: string) {
         if (Object.values(viz).includes(true)) {
             console.log(`tree at [${rowIndex}, ${colIndex}] is visible.`)
             visibleTotal++
+            return true
         }
+        console.log(`tree at [${rowIndex}, ${colIndex}] is not visible.`) 
+        return false
     }
 
     const getHeight = (tree: tree): number => {
@@ -108,6 +117,17 @@ function part1(input: string) {
         height = parseInt(rows[rowIndex].charAt(colIndex))
         return height
     }
+
+    const checkAll = () => {
+        for (let i = 0; i < rows.length; i++) {
+            for (let j = 0; j < rows.length; j++) {
+                let tree: tree = [i, j]
+                if (checkVisible(tree)) treesVisible++
+            }
+        }
+    }
+
+    checkAll()
 
     // check each tree
 
