@@ -14,7 +14,6 @@ fs.readFile('input.txt', 'utf8', (err, data) => {
     part1(data);
 });
 
-
 function part1(input: string) {
     const rows = input.split("\n")
 
@@ -120,25 +119,15 @@ function part1(input: string) {
 
     const checkAll = () => {
         for (let i = 0; i < rows.length; i++) {
-            for (let j = 0; j < rows.length; j++) {
+            for (let j = 0; j < rows[0].length; j++) {
                 let tree: tree = [i, j]
                 if (checkVisible(tree)) treesVisible++
+                console.log(`Trees Visible: ${treesVisible}; VisibleTotal: ${visibleTotal}`)
             }
         }
     }
 
     checkAll()
-
-    // check each tree
-
-    // for (let i = 0; i < rows[0].length; i++) {}
-
-    // let string = rows.forEach(row => row.split('').forEach(char => getVisibility(char)))
-
-    // check each tree at [rowIndex, colIndex]
-    // from [0, 0]
-    // to i < [rowLength, colLength]
-
     
 }
 
