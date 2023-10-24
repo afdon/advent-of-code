@@ -1,4 +1,10 @@
+    // need: number of trees visible from outside the grid
 
+    // each tree is visible from the...
+    // T, iff all the trees of the same colIndex and a lower rowIndex are a lower number
+    // B, iff all the trees of the same colIndex and a higher rowIndex are a lower number
+    // L, iff all the trees of the same rowIndex and a lower colIndex are a lower number
+    // R, iff all the trees of the same rowIndex and a higher colIndex are a lower number
 
 import fs from "fs";
 
@@ -21,14 +27,6 @@ function part1(input: string) {
 
     const rowLength = rows.length
     const colLength = rows[0].length
-    
-    // need: number of trees visible from outside the grid
-
-    // each tree is visible from the...
-    // T, iff all the trees of the same colIndex and a lower rowIndex are a lower number
-    // B, iff all the trees of the same colIndex and a higher rowIndex are a lower number
-    // L, iff all the trees of the same rowIndex and a lower colIndex are a lower number
-    // R, iff all the trees of the same rowIndex and a higher colIndex are a lower number
 
     let visibleTotal: number = 0
     let treesVisible: number = 0
