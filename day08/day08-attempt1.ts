@@ -55,37 +55,37 @@ function part1(input: string) {
         for (let i = 0; i < rowIndex; i++ ) {
             if ([i, colIndex] > tree) { 
                 visible.top = false; 
-                break 
+                // break 
             }
-            treesOnTop.push([i, colIndex])
-            console.log(`adding ${[i, colIndex]} to treesOnTop: ${treesOnTop}.`)
+            // treesOnTop.push([i, colIndex])
+            // console.log(`adding ${[i, colIndex]} to treesOnTop: ${treesOnTop}.`)
         }
 
         for (let i = rowIndex + 1; i < rowLength; i++ ) {
             if ([i, colIndex] > tree) { 
                 visible.bottom = false; 
-                break 
+                // break 
             }
-            treesOnBottom.push([i, colIndex])
-            console.log(`adding ${[i, colIndex]} to treesOnBottom: ${treesOnTop}`)        
+            // treesOnBottom.push([i, colIndex])
+            // console.log(`adding ${[i, colIndex]} to treesOnBottom: ${treesOnBottom}`)        
         }
 
         for (let i = 0; i < colIndex; i++ ) {
             if ([rowIndex, i] > tree) { 
                 visible.left = false; 
-                break 
+                // break 
             }
-            treesOnLeft.push([rowIndex, i])
-            console.log(`adding ${[rowIndex, i]} to treesOnLeft: ${treesOnLeft}`)        
+            // treesOnLeft.push([rowIndex, i])
+            // console.log(`adding ${[rowIndex, i]} to treesOnLeft: ${treesOnLeft}`)        
         }
 
         for (let i = colIndex; i < colLength; i++ ) {
             if ([rowIndex, i] > tree) { 
                 visible.right = false; 
-                break 
+                // break 
             }
-            treesOnRight.push([rowIndex, i])
-            console.log(`adding ${[rowIndex, i]} to treesOnRight: ${treesOnRight}`)        
+            // treesOnRight.push([rowIndex, i])
+            // console.log(`adding ${[rowIndex, i]} to treesOnRight: ${treesOnRight}`)        
         }
         return visible
     
@@ -102,7 +102,22 @@ function part1(input: string) {
         }
     }
 
+    const getHeight = (tree: tree): number => {
+        let [rowIndex, colIndex] = tree
+        let height: number
+        height = parseInt(rows[rowIndex].charAt(colIndex))
+        return height
+    }
+
     // check each tree
+
+    // for (let i = 0; i < rows[0].length; i++) {}
+
+    // let string = rows.forEach(row => row.split('').forEach(char => getVisibility(char)))
+
+    // check each tree at [rowIndex, colIndex]
+    // from [0, 0]
+    // to i < [rowLength, colLength]
 
     
 }
