@@ -26,7 +26,7 @@ function part1(input: string) {
   const rowLength = rows.length;
   const colLength = rows[0].length;
 
-  const getViewingDistance = (tree: tree): visible => {
+  const getViewingDistance = (tree: tree): any => {
     let [rowIndex, colIndex] = tree;
 
     let visible = {
@@ -37,6 +37,7 @@ function part1(input: string) {
     };
 
     for (let i = rowIndex - 1; i >= 0; i--) {
+        if (i < 0) { visible.top = 0; break }
       if (getHeight([i, colIndex]) < getHeight(tree)) {
         visible.top++;
       } else {
@@ -46,6 +47,7 @@ function part1(input: string) {
     }
 
     for (let i = rowIndex + 1; i < rowLength; i++) {
+        if (i >= rowLength) { visible.bottom = 0; break }
       if (getHeight([i, colIndex]) <= getHeight(tree)) {
         visible.bottom++;
       } else {
@@ -55,6 +57,7 @@ function part1(input: string) {
     }
 
     for (let i = colIndex - 1; i >= 0; i--) {
+        if (i < 0) { visible.left = 0; break }
       if (getHeight([rowIndex, i]) <= getHeight(tree)) {
         visible.left++;
       } else {
@@ -64,6 +67,7 @@ function part1(input: string) {
     }
 
     for (let i = colIndex + 1; i < colLength; i++) {
+        if (i >= colLength) { visible.bottom = 0; break }
       if (getHeight([rowIndex, i]) <= getHeight(tree)) {
         visible.right++;
       } else {
@@ -72,7 +76,10 @@ function part1(input: string) {
       }
     }
 
-    return visible;
+    // console.log(`visible:`, visible)
+    let scenicScoreForTree = visible.top * visible.bottom * visible.left * visible.right
+    // return visible;
+    return scenicScoreForTree
   };
 
   const getScenicScore = (tree: tree): number => {
@@ -93,10 +100,15 @@ function part1(input: string) {
     for (let i = 0; i < rows.length; i++) {
       for (let j = 0; j < rows[0].length; j++) {
         let tree: tree = [i, j];
-        if (getScenicScore(tree) > score) score += getScenicScore(tree);
-        console.log(
-          `Tree at ${tree} has new highest scenic score of ${score}.`
-        );
+        // if (getScenicScore(tree) > score) score = getScenicScore(tree);
+        // console.log(
+        //   `Tree at ${tree} has new highest scenic score of ${score}.`
+        // );
+        let scenicScoreForTree = getViewingDistance(tree)
+        if (scenicScoreForTree > score) {
+            score = scenicScoreForTree
+            console.log(`scenic score:`, score)
+        }
       }
     }
   };
