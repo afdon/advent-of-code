@@ -38,7 +38,10 @@ function part1(input: string) {
     };
 
     for (let i = rowIndex - 1; i >= 0; i--) {
-        if (i < 0) visible.top = 0
+        if (i < 0) { 
+            visible.top = 0; 
+            break;
+        }
       if (getHeight([i, colIndex]) < getHeight(tree)) {
         visible.top++;
       } else {
@@ -48,7 +51,10 @@ function part1(input: string) {
     }
 
     for (let i = rowIndex + 1; i < rowLength; i++) {
-        if (i >= rowLength) visible.bottom = 0
+        if (i >= rowLength) {
+            visible.bottom = 0; 
+            break;
+        }
       if (getHeight([i, colIndex]) <= getHeight(tree)) {
         visible.bottom++;
       } else {
@@ -58,7 +64,10 @@ function part1(input: string) {
     }
 
     for (let i = colIndex - 1; i >= 0; i--) {
-        if (i < 0) visible.left = 0
+        if (i < 0) {
+            visible.left = 0;
+            break;
+        }
       if (getHeight([rowIndex, i]) <= getHeight(tree)) {
         visible.left++;
       } else {
@@ -68,7 +77,10 @@ function part1(input: string) {
     }
 
     for (let i = colIndex + 1; i < colLength; i++) {
-        if (i >= colLength) visible.bottom = 0
+        if (i >= colLength) {
+            visible.bottom = 0;
+            break;
+        }
       if (getHeight([rowIndex, i]) <= getHeight(tree)) {
         visible.right++;
       } else {
@@ -77,14 +89,15 @@ function part1(input: string) {
       }
     }
 
-    console.log("visible", visible)
+    console.log(`tree at ${tree}; visible:`, visible)
     return visible;
   };
 
   const getScenicScore = (tree: tree): number => {
     let view = getViewingDistance(tree);
+    console.log(`tree at ${tree} view`, view)
     let scenicScore = view.top * view.bottom * view.left * view.right;
-    console.log(`Scenic score: ${scenicScore}`);
+    console.log(`tree at ${tree} has scenic score: ${scenicScore}`);
     return scenicScore;
   };
 
