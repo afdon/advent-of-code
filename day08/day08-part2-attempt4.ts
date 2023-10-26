@@ -37,9 +37,9 @@ function part1(input: string) {
       right: 0,
     };
 
+    // top
     for (let i = rowIndex - 1; i >= 0; i--) {
         if (i < 0) { 
-            visible.top = 0; 
             break;
         }
       if (getHeight([i, colIndex]) < getHeight(tree)) {
@@ -50,22 +50,22 @@ function part1(input: string) {
       }
     }
 
-    for (let i = rowIndex + 1; i < rowLength; i++) {
-        if (i >= rowLength) {
-            visible.bottom = 0; 
-            break;
-        }
+    // bottom -- TROUBLESHOOT THIS 
+    for (let i = rowIndex + 1; i < rowLength - 1; i++) {
+        // if (i >= rowLength) {
+        //     break;
+        // }
       if (getHeight([i, colIndex]) <= getHeight(tree)) {
         visible.bottom++;
       } else {
         visible.bottom++;
-        break;
+        break; 
       }
     }
 
+    // left
     for (let i = colIndex - 1; i >= 0; i--) {
         if (i < 0) {
-            visible.left = 0;
             break;
         }
       if (getHeight([rowIndex, i]) <= getHeight(tree)) {
@@ -76,9 +76,9 @@ function part1(input: string) {
       }
     }
 
+    // right
     for (let i = colIndex + 1; i < colLength; i++) {
         if (i >= colLength) {
-            visible.bottom = 0;
             break;
         }
       if (getHeight([rowIndex, i]) <= getHeight(tree)) {
