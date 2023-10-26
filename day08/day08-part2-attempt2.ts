@@ -11,7 +11,7 @@ type visible = { top: number; bottom: number; left: number; right: number };
 
 let score: number = 0;
 
-fs.readFile("input.txt", "utf8", (err, data) => {
+fs.readFile("example.txt", "utf8", (err, data) => {
   if (err) {
     console.error("Error reading input file:", err);
     return;
@@ -76,6 +76,7 @@ function part1(input: string) {
       }
     }
 
+    console.log("visible", visible)
     return visible;
   };
 
