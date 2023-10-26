@@ -51,11 +51,11 @@ function part1(input: string) {
     }
 
     // bottom -- TROUBLESHOOT THIS 
-    for (let i = rowIndex + 1; i < rowLength - 1; i++) {
-        // if (i >= rowLength) {
-        //     break;
-        // }
-      if (getHeight([i, colIndex]) <= getHeight(tree)) {
+    for (let i = rowIndex + 1; i < rowLength; i++) {
+        if (i >= rowLength) {
+            break;
+        }
+      if (getHeight([i, colIndex]) < getHeight(tree)) {
         visible.bottom++;
       } else {
         visible.bottom++;
@@ -68,7 +68,7 @@ function part1(input: string) {
         if (i < 0) {
             break;
         }
-      if (getHeight([rowIndex, i]) <= getHeight(tree)) {
+      if (getHeight([rowIndex, i]) < getHeight(tree)) {
         visible.left++;
       } else {
         visible.left++;
@@ -81,7 +81,7 @@ function part1(input: string) {
         if (i >= colLength) {
             break;
         }
-      if (getHeight([rowIndex, i]) <= getHeight(tree)) {
+      if (getHeight([rowIndex, i]) < getHeight(tree)) {
         visible.right++;
       } else {
         visible.right++
