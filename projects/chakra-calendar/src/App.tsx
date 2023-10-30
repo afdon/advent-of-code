@@ -23,9 +23,9 @@ export const App = () => (
         <ColorModeSwitcher justifySelf="flex-end" />
 
         <Heading as='h1' size='xl' m='0'>Calendar of Code</Heading>
-        {/* <Heading as='h3' size='md' m='2'>A Celebration of Advent of Code</Heading> */}
+        <Heading as='h3' size='md' m='0' fontWeight='semibold'>An Advent of Code Journal</Heading>
 
-        <Spacer m='0'></Spacer>
+        <Spacer m='2'></Spacer>
 
         <SimpleGrid columns={5} spacing={4} color='white'>
           <Box bg='tomato' height='80px'>
