@@ -20,7 +20,7 @@ function part1(input: string) {
 
 const root = {
   child1: {}
-  child2: {}
+  // child2: {}
 }
 
 // const root = {
