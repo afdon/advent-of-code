@@ -4,7 +4,7 @@
 export default function shelter() {
 
     return (
-        <div className='flex flex-col gap-2 m-12 text-2xl w-[100vmin]'>
+        <div className='flex flex-col gap-2 m-12 text-xl w-[100vmin]'>
 
             <p>
                 {/* You decide to build a shelter in between 4 trees, using their trunks as support.  */}
