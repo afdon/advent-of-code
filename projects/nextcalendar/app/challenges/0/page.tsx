@@ -1,8 +1,6 @@
 "use client"
 
-
 import { useState } from 'react'
-import CodeCalendar from '../../components/codecalendar/CodeCalendar'
 
 import { ChevronsUpDown, Plus, X } from "lucide-react"
 
@@ -13,13 +11,40 @@ import {
     CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 
-export default function Home() {
+export default function zero() {
 
     const [isOpen, setIsOpen] = useState(false)
 
     return (
-        <div className='m-4'>
-            
+        <div className='m-4 text-2xl'>
+
+            <>
+                It is nighttime. You are lost in a forest. You can barely see your surroundings.
+
+                <br />
+
+                There are clusters of dense trees all around you, as well as several navigable paths. 
+
+                You are wearing a backpack.
+
+                <br />
+                Night is rapidly falling. What will you decide to do?
+
+                <ul>
+                    <li>scope out the area with the remaining light</li>
+                    <li>investigate the contents of your backpack</li>
+                </ul>
+
+                ...
+                    
+                <ul>
+                    <li>make a fire</li>
+                    <li>hunt for food</li>
+                    <li>build a shelter</li>
+                </ul>
+
+            </>
+
             <Collapsible
                 open={isOpen}
                 onOpenChange={setIsOpen}
@@ -37,30 +62,14 @@ export default function Home() {
                     </CollapsibleTrigger>
                 </div>
                 <div className="rounded-md border px-4 py-3 text-lg">
-                    Challenge 0
-                    <>
-                    <br/>
-                    It is nighttime. You are lost in a forest. There are clusters of dense trees all around you. You decide to...
-
-                    <ul>
-                        <li>explore the area</li>
-                    </ul>
-
-                    - You decide to explore the area.
-                        Task: build a 2D map of the area.
-                    - You decide to build a campfire.
-                        Task: chop firewood from surrounding trees.
-                    - You decide to follow the first path.
-                        Task: follow the path and track where you've been.
-
-                    </>
+                    Explore the area
                 </div>
                 <CollapsibleContent className="space-y-2">
                     <div className="rounded-md border px-4 py-3 text-lg">
-                        Challenge 1
+                        Chop firewood
                     </div>
                     <div className="rounded-md border px-4 py-3 text-lg">
-                        Challenge 2
+                        Follow the path
                     </div>
                 </CollapsibleContent>
 
