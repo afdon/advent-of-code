@@ -14,7 +14,7 @@ import {
 export default function Intro() {
 
     return (
-        <div className='flex flex-col gap-2 m-12 text-xl w-[50vmin]'>
+        <div className='flex flex-col gap-2 m-12 text-xl w-[60vmin]'>
 
                 <p>
                     You are lost in a forest at dusk.
