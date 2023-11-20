@@ -3,7 +3,7 @@
 export default function backpack() {
 
     return (
-        <div className='flex flex-col gap-2 m-12 text-2xl w-[80vmin]'>
+        <div className='flex flex-col gap-2 m-12 text-xl w-[80vmin]'>
                 Your backpack contains some useful items... and a lot of fluff.
 
                 As you go through the items, you note down and categorize each one.
