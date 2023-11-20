@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Intro from '../challenges/intro/Intro'
+import Intro from '../challenges/intro/page'
 import { Home as HomeIcon, UserCircle, CalendarDays } from 'lucide-react'
 
 export default function Home() {

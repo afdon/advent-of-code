@@ -17,19 +17,19 @@ export default function Intro() {
         <div className='flex flex-col gap-2 m-12 text-xl w-[60vmin]'>
 
                 <p>
-                    You are lost in a forest at dusk.
+                    You are lost in a forest at dusk. Dense clusters of trees loom all around.
                 </p>
 
 
                 <p>
-                    Nightfall is descending rapidly. Dense clusters of trees loom all around.
+                    Nightfall is descending rapidly. You can barely see in front of you.
                 </p>
 
                 <p>
-                    You can barely see in front of you, and your backpack is weighing on your shoulders.
+                    Your backpack is weighing on your shoulders. You heave it off and unzip it.
                 </p>
 
-                <Link href='/backpack'>examine backpack</Link>
+                <Link href='/challenges/backpack' className='font-bold underline hover:text-blue-700'>Open your backpack.</Link>
 
         </div>
     )
